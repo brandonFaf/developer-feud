@@ -1,27 +1,19 @@
-<script>
-	import Board from '../components/Board.svelte';
+<div class="container">
+	<a href="/0" class="logoLink"><img class="logo" src="/DevFeud.png" alt="logo" /></a>
+	<div class="credits">
+		<h1>Credits:</h1>
 
-	import { round1 } from '../data/rounds';
-	import { roundScore, team1Score, team2Score } from '../data/scoreStore';
-</script>
-
-<div class="gameBoard">
-	<div class="score" id="boardScore">{$roundScore}</div>
-	<div class="score" id="team1">{$team1Score}</div>
-	<div class="score" id="team2">{$team2Score}</div>
-
-	<div class="questionHolder">
-		<span class="question">{round1.question}</span>
+		<div class="credit-row">
+			<img class="jspartylogo" src="/js-party-original.png" alt="jspartylogo" />
+			<a href="https://codepen.io/MacEvelly/pen/rLWeYP?editors=0010">Brent Williams</a>
+			<div>Ivan Witteborg</div>
+		</div>
 	</div>
-
-	<Board answers={round1.answers} />
-
 	<style>
 		html {
 			height: 100%;
 			width: 100%;
 		}
-
 		body {
 			background: #a7cfdf;
 			background: -moz-linear-gradient(top, #a7cfdf 0%, #23538a 100%);
@@ -32,249 +24,44 @@
 			height: 100%;
 			width: 100%;
 			box-sizing: border-box;
-		}
-
-		.gameBoard .cardHolder > div,
-		.gameBoard .LBG {
-			background: #cedbe9;
-			background: -moz-linear-gradient(
-				top,
-				#cedbe9 0%,
-				#aac5de 17%,
-				#6199c7 50%,
-				#3a84c3 51%,
-				#419ad6 59%,
-				#4bb8f0 71%,
-				#3a8bc2 84%,
-				#26558b 100%
-			);
-			background: -webkit-linear-gradient(
-				top,
-				#cedbe9 0%,
-				#aac5de 17%,
-				#6199c7 50%,
-				#3a84c3 51%,
-				#419ad6 59%,
-				#4bb8f0 71%,
-				#3a8bc2 84%,
-				#26558b 100%
-			);
-			background: linear-gradient(
-				to bottom,
-				#cedbe9 0%,
-				#aac5de 17%,
-				#6199c7 50%,
-				#3a84c3 51%,
-				#419ad6 59%,
-				#4bb8f0 71%,
-				#3a8bc2 84%,
-				#26558b 100%
-			);
-			filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#cedbe9', endColorstr='#26558b', GradientType=0);
-		}
-
-		.gameBoard .cardHolder > div:empty,
-		.gameBoard .score,
-		.gameBoard .button,
-		.gameBoard .DBG {
-			background: #7db9e8;
-			background: -moz-linear-gradient(top, #7db9e8 0%, #207cca 49%, #2989d8 50%, #1e5799 100%);
-			background: -webkit-linear-gradient(top, #7db9e8 0%, #207cca 49%, #2989d8 50%, #1e5799 100%);
-			background: linear-gradient(to bottom, #7db9e8 0%, #207cca 49%, #2989d8 50%, #1e5799 100%);
-			filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#7db9e8', endColorstr='#1e5799', GradientType=0);
-		}
-
-		.gameBoard {
-			position: relative;
-			font-family: helvetica, sans-serif;
-			color: white;
-			text-shadow: 1px 1px 3px rgba(0, 0, 0, 1);
-			border: 5px solid #003c7b;
-			text-align: center;
-			padding: 150px;
-			border-radius: 50%;
-			max-width: 1000px;
-			max-height: 800px;
-			min-width: 305px;
-			margin: auto;
-			background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/40041/bgFF.svg') #0c4779;
-			/*background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/40041/bgFF.svg') #3a84c3;*/
-			background-repeat: repeat;
-			background-position: center center;
-			-webkit-box-shadow: 0 1px 24px 1px rgba(0, 0, 0, 0.48);
-			-moz-box-shadow: 0 1px 24px 1px rgba(0, 0, 0, 0.48);
-			box-shadow: 0 1px 24px 1px rgba(0, 0, 0, 0.48);
-		}
-
-		.gameBoard .score {
-			position: absolute;
-			text-align: center;
-			margin: auto;
-			font-size: 45px;
-			height: 50px;
-			line-height: 50px;
-			width: 75px;
-			padding: 20px;
-			border: 2px solid white;
-			-webkit-box-shadow: inset 0 1px 24px 1px rgba(0, 0, 0, 0.48);
-			-moz-box-shadow: inset 0 1px 24px 1px rgba(0, 0, 0, 0.48);
-			box-shadow: inset 0 1px 24px 1px rgba(0, 0, 0, 0.48);
-		}
-		.gameBoard .score#boardScore {
-			height: 75px;
-			line-height: 75px;
-			width: 125px;
-			font-size: 65px;
-			left: 0;
-			right: 0;
-			top: 20px;
-		}
-		.gameBoard .score#team1 {
-			left: 10px;
-			top: 0;
-			bottom: 0;
-		}
-		.gameBoard .score#team2 {
-			right: 10px;
-			top: 0;
-			bottom: 0;
-		}
-
-		.gameBoard .questionHolder {
-			width: 94%;
-			margin: auto;
-			height: 100px;
-			line-height: 100px;
-			text-align: center;
-			font-size: 30px;
-			color: #003c7b;
-			text-shadow: initial;
-			text-align: center;
-			border: 1px solid black;
-			background: #deeeff;
-			padding: 10px;
-			margin-bottom: 15px;
-			border: 1px solid black;
-			-webkit-box-shadow: inset 0 1px 24px 1px rgba(0, 0, 0, 0.48);
-			-moz-box-shadow: inset 0 1px 24px 1px rgba(0, 0, 0, 0.48);
-			box-shadow: inset 0 1px 24px 1px rgba(0, 0, 0, 0.48);
-		}
-		.gameBoard .questionHolder span {
-			display: inline-block;
-			vertical-align: middle;
-			line-height: normal;
-		}
-
-		.gameBoard .colHolder {
-			background: black;
-			padding: 4px;
-			display: flex;
-		}
-		.gameBoard .colHolder > div {
-			display: block;
-			width: 100%;
-			-webkit-box-shadow: 0 1px 24px 1px rgba(0, 0, 0, 0.48);
-			-moz-box-shadow: 0 1px 24px 1px rgba(0, 0, 0, 0.48);
-			box-shadow: 0 1px 24px 1px rgba(0, 0, 0, 0.48);
-		}
-		.gameBoard .cardHolder {
-			display: inline-block;
-			position: relative;
-			vertical-align: top;
-			height: 50px;
-			margin: 4px;
-			width: 95%;
-			background: black;
-			border: 4px solid white;
-		}
-		.gameBoard .cardHolder:not(.empty) {
-			cursor: pointer;
-		}
-		.gameBoard .cardHolder b {
-			position: absolute;
-			right: 0;
-			width: 45px;
-			text-align: center;
-			border-left: 2px solid #003c7b;
-		}
-		.gameBoard .cardHolder span {
-			margin: 10px;
-		}
-		.gameBoard .cardHolder > div {
-			top: -2px;
-			left: -2px;
-			margin: 0px;
-			padding: 0px;
-			position: absolute;
-			width: 100%;
-			line-height: 100%;
-			height: 100%;
-			border: 2px solid #003c7b;
-			line-height: 50px;
-		}
-		.gameBoard .cardHolder .back {
-			font-size: 25px;
-			text-align: left;
-			height: 50px;
-			line-height: 50px;
-		}
-		.gameBoard .cardHolder .back span {
-			text-align: left;
-			display: inline-block;
-			vertical-align: middle;
-			line-height: normal;
-		}
-		.gameBoard .cardHolder .front {
-			text-align: center;
-		}
-		.gameBoard .cardHolder .front span {
-			font-size: 30px;
-			position: absolute;
-			border-radius: 50%;
-			line-height: 35px;
-			height: 35px;
-			width: 45px;
-			left: 0;
-			right: 0;
-			top: 0;
-			bottom: 0;
-			display: block;
-			margin: auto;
-			border: 2px solid #003c7b;
-		}
-
-		.gameBoard .btnHolder {
-			position: absolute;
-			margin: auto;
-			left: 0;
-			right: 0;
-			bottom: 45px;
-		}
-		.gameBoard .btnHolder .button {
-			cursor: pointer;
-			display: inline-block;
-			font-size: 20px;
-			margin: 10px;
-			height: 50px;
-			line-height: 50px;
-			width: 175px;
-			border: 3px solid white;
-			-webkit-box-shadow: 0 1px 24px 1px rgba(0, 0, 0, 0.48);
-			-moz-box-shadow: 0 1px 24px 1px rgba(0, 0, 0, 0.48);
-			box-shadow: 0 1px 24px 1px rgba(0, 0, 0, 0.48);
-		}
-		.gameBoard .btnHolder .button#awardTeam1 {
-			border-radius: 50px 0 0 50px;
-		}
-		.gameBoard .btnHolder .button#awardTeam2 {
-			border-radius: 0 50px 50px 0;
-		}
-
-		@media screen and (min-width: 780px) {
-			.gameBoard .colHolder > div {
-				display: inline-block;
-				width: 50%;
-			}
+			overflow: hidden;
 		}
 	</style>
 </div>
+
+<style>
+	.logoLink {
+		display: flex;
+		justify-content: center;
+	}
+	.container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100vh;
+		overflow: hidden;
+		box-sizing: border-box;
+		flex-direction: column;
+	}
+	.credits {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+	}
+	.credit-row {
+		display: flex;
+		flex-direction: row;
+		width: 60%;
+		justify-content: space-evenly;
+		font-size: 30px;
+		align-items: center;
+	}
+	.jspartylogo {
+		width: 150px;
+	}
+	.logo {
+		width: 60%;
+	}
+</style>

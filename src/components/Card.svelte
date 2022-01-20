@@ -3,11 +3,29 @@
 	import { roundScore } from '../data/scoreStore';
 	export let answer: Answer;
 	import { page } from '$app/stores';
-	console.log(answer.answer.length);
 	const revealCorrectAnswer = () => {
+		if (Audio) {
+			const audio = new Audio();
+			audio.src = '/correct.mp3';
+			audio.currentTime = 0;
+			audio.loop = false;
+
+			audio.play();
+		}
 		answer.reveal = true;
 		$roundScore += $page.url.searchParams.get('double') ? answer.points * 2 : answer.points;
 	};
+	function flip(node, { delay = 0, duration = 500 }) {
+		return {
+			delay,
+			duration,
+			css: (t, u) => `
+				transform: rotateX(${1 - u * 180}deg);
+                				opacity: ${1 - u};
+
+			`
+		};
+	}
 </script>
 
 {#if answer.reveal}

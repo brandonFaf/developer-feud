@@ -16,14 +16,28 @@ import X from '../components/X.svelte';
         $roundScore = 0;
         wrong=[]
 	}
+
     const giveX = ()=>{
+		if(Audio){
+
+			const audio = new Audio();
+			audio.src = '/wrong.mp3';
+			audio.currentTime = 0;
+			audio.loop = false;
+			
+			audio.play();
+		}
         display = 'block';
         setTimeout(()=>display = 'none', 1000)
-        console.log(wrong.length)
         if(wrong.length < 3){
             wrong=[...wrong,true]
         }
     }
+    const removeX = ()=>{
+        if(wrong.length > 0)
+        wrong = wrong.slice(0,-1)
+    }
+    
 </script>
 <div style:display class="bigX">X</div>
 <div class="round-container">
@@ -60,7 +74,7 @@ import X from '../components/X.svelte';
 	</div>
 
 	<Board answers={round.answers} />
-    <div class="btnHolder">
+    <div class="btnHolder" on:click={()=>removeX()}>
         {#each wrong as w }
         <X/>
         {/each}
